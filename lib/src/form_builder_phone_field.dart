@@ -11,63 +11,63 @@ import 'package:phone_number/phone_number.dart';
 /// Field for international phone number input.
 class FormBuilderPhoneField extends FormBuilderField<String> {
   //TODO: Add documentation
-  final int maxLines;
+  final int? maxLines;
   final TextInputType keyboardType;
   final bool obscureText;
-  final TextStyle style;
-  final TextEditingController controller;
+  final TextStyle? style;
+  final TextEditingController? controller;
   final TextCapitalization textCapitalization;
-  final TextInputAction textInputAction;
-  final StrutStyle strutStyle;
-  final TextDirection textDirection;
+  final TextInputAction? textInputAction;
+  final StrutStyle? strutStyle;
+  final TextDirection? textDirection;
   final TextAlign textAlign;
   final bool autofocus;
   final bool autocorrect;
   final bool maxLengthEnforced;
-  final int maxLength;
-  final VoidCallback onEditingComplete;
-  final ValueChanged<String> onFieldSubmitted;
-  final List<TextInputFormatter> inputFormatters;
+  final int? maxLength;
+  final VoidCallback? onEditingComplete;
+  final ValueChanged<String>? onFieldSubmitted;
+  final List<TextInputFormatter>? inputFormatters;
   final double cursorWidth;
-  final Radius cursorRadius;
-  final Color cursorColor;
-  final Brightness keyboardAppearance;
+  final Radius? cursorRadius;
+  final Color? cursorColor;
+  final Brightness? keyboardAppearance;
   final EdgeInsets scrollPadding;
   final bool enableInteractiveSelection;
-  final InputCounterWidgetBuilder buildCounter;
+  final InputCounterWidgetBuilder? buildCounter;
   final bool expands;
-  final int minLines;
-  final bool showCursor;
-  final VoidCallback onTap;
+  final int? minLines;
+  final bool? showCursor;
+  final VoidCallback? onTap;
 
   // For country dialog
-  final String searchText;
-  final EdgeInsets titlePadding;
-  final bool isSearchable;
-  final Text dialogTitle;
-  final String defaultSelectedCountryIsoCode;
-  final List<String> priorityListByIsoCode;
-  final List<String> countryFilterByIsoCode;
-  final TextStyle dialogTextStyle;
+  final String? searchText;
+  final EdgeInsets? titlePadding;
+  final bool? isSearchable;
+  final Text? dialogTitle;
+  final String? defaultSelectedCountryIsoCode;
+  final List<String>? priorityListByIsoCode;
+  final List<String>? countryFilterByIsoCode;
+  final TextStyle? dialogTextStyle;
   final bool isCupertinoPicker;
-  final double cupertinoPickerSheetHeight;
-  final TextAlignVertical textAlignVertical;
+  final double? cupertinoPickerSheetHeight;
+  final TextAlignVertical? textAlignVertical;
 
   /// Creates field for international phone number input.
   FormBuilderPhoneField({
-    Key key,
+    Key? key,
     //From Super
-    @required String name,
-    FormFieldValidator<String> validator,
-    String initialValue,
+    required String name,
+    FormFieldValidator<String>? validator,
+    String? initialValue,
     InputDecoration decoration = const InputDecoration(),
-    ValueChanged<String> onChanged,
-    ValueTransformer<String> valueTransformer,
+    ValueChanged<String>? onChanged,
+    ValueTransformer<String>? valueTransformer,
     bool enabled = true,
-    FormFieldSetter<String> onSaved,
+    FormFieldSetter<String>? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
-    VoidCallback onReset,
-    FocusNode focusNode,
+    VoidCallback? onReset,
+    FocusNode? focusNode,
     this.maxLines,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
@@ -123,7 +123,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
           onReset: onReset,
           decoration: decoration,
           focusNode: focusNode,
-          builder: (FormFieldState<String> field) {
+          builder: (FormFieldState<String?> field) {
             final state = field as _FormBuilderPhoneFieldState;
 
             return InputDecorator(
@@ -153,7 +153,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
                           '+${state._selectedDialogCountry.phoneCode} ',
                           style: Theme.of(state.context)
                               .textTheme
-                              .subtitle1
+                              .subtitle1!
                               .merge(style),
                         ),
                       ],
@@ -216,8 +216,8 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
 
 class _FormBuilderPhoneFieldState
     extends FormBuilderFieldState<FormBuilderPhoneField, String> {
-  TextEditingController _effectiveController;
-  Country _selectedDialogCountry;
+  late TextEditingController _effectiveController;
+  late Country _selectedDialogCountry;
 
   String get fullNumber {
     // When there is no phone number text, the field is empty -- the country
@@ -248,9 +248,9 @@ class _FormBuilderPhoneFieldState
 
   Future<void> _parsePhone() async {
     // print('initialValue: $initialValue');
-    if (initialValue != null && initialValue.isNotEmpty) {
+    if (initialValue != null && initialValue!.isNotEmpty) {
       try {
-        final parseResult = await PhoneNumberUtil().parse(initialValue);
+        final parseResult = await PhoneNumberUtil().parse(initialValue!);
         if (parseResult != null) {
           setState(() {
             _selectedDialogCountry = CountryPickerUtils.getCountryByPhoneCode(
@@ -259,7 +259,7 @@ class _FormBuilderPhoneFieldState
           _effectiveController.text = parseResult.nationalNumber;
         }
       } catch (error) {
-        _effectiveController.text = initialValue.replaceFirst('+', '');
+        _effectiveController.text = initialValue!.replaceFirst('+', '');
       }
     }
   }
@@ -276,19 +276,19 @@ class _FormBuilderPhoneFieldState
         return CountryPickerCupertino(
           pickerSheetHeight: widget.cupertinoPickerSheetHeight ?? 300.0,
           onValuePicked: (Country country) {
-            effectiveFocusNode.requestFocus();
+            effectiveFocusNode!.requestFocus();
             setState(() => _selectedDialogCountry = country);
             didChange(fullNumber);
           },
           itemFilter: widget.countryFilterByIsoCode != null
-              ? (c) => widget.countryFilterByIsoCode.contains(c.isoCode)
+              ? (c) => widget.countryFilterByIsoCode!.contains(c.isoCode)
               : null,
           priorityList: widget.priorityListByIsoCode != null
               ? List.generate(
-                  widget.priorityListByIsoCode.length,
+                  widget.priorityListByIsoCode!.length,
                   (index) {
                     return CountryPickerUtils.getCountryByIsoCode(
-                      widget.priorityListByIsoCode[index],
+                      widget.priorityListByIsoCode![index],
                     );
                   },
                 )
@@ -326,14 +326,14 @@ class _FormBuilderPhoneFieldState
               invokeChange();
             },
             itemFilter: widget.countryFilterByIsoCode != null
-                ? (c) => widget.countryFilterByIsoCode.contains(c.isoCode)
+                ? (c) => widget.countryFilterByIsoCode!.contains(c.isoCode)
                 : null,
             priorityList: widget.priorityListByIsoCode != null
                 ? List.generate(
-                    widget.priorityListByIsoCode.length,
+                    widget.priorityListByIsoCode!.length,
                     (index) {
                       return CountryPickerUtils.getCountryByIsoCode(
-                          widget.priorityListByIsoCode[index]);
+                          widget.priorityListByIsoCode![index]);
                     },
                   )
                 : null,
