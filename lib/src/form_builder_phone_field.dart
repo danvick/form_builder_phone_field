@@ -231,7 +231,7 @@ class _FormBuilderPhoneFieldState
     super.initState();
     _effectiveController = widget.controller ?? TextEditingController();
     _selectedDialogCountry = CountryPickerUtils.getCountryByIsoCode(
-        widget.defaultSelectedCountryIsoCode);
+        widget.defaultSelectedCountryIsoCode!);
     _parsePhone();
   }
 
@@ -347,8 +347,8 @@ class _FormBuilderPhoneFieldState
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: CountryPickerUtils.getDefaultFlagImage(country),
-        title: Text(country.name),
-        trailing: Text('+${country.phoneCode}'),
+        title: Text(country.name!),
+        trailing: Text('+${country.phoneCode!}'),
       ),
     );
   }
