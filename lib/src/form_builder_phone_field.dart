@@ -11,7 +11,6 @@ import 'package:phone_number/phone_number.dart';
 /// Field for international phone number input.
 class FormBuilderPhoneField extends FormBuilderField<String> {
   //TODO: Add documentation
-  final int? maxLines;
   final TextInputType keyboardType;
   final bool obscureText;
   final TextStyle? style;
@@ -68,7 +67,6 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
     VoidCallback? onReset,
     FocusNode? focusNode,
-    this.maxLines,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     this.scrollPadding = const EdgeInsets.all(20.0),
@@ -174,7 +172,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
                       onChanged: (val) {
                         state.invokeChange();
                       },
-                      maxLines: maxLines,
+                      maxLines: 1,
                       keyboardType: keyboardType,
                       obscureText: obscureText,
                       onEditingComplete: onEditingComplete,
