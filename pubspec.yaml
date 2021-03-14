@@ -10,15 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_form_builder:
+  flutter_form_builder: 
     git:
       url: https://github.com/Sportner/flutter_form_builder.git
-  phone_number:
-    git:
-      url: https://github.com/VictorUvarov/phone_number.git
-  country_pickers:
-    git:
-      url: https://github.com/haliknihudas666/country_pickers.git
+  phone_number: ^0.9.0
+  country_pickers: ^2.0.0
 
 dev_dependencies:
   flutter_test:

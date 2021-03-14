@@ -14,7 +14,7 @@ packages:
       name: basic_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0-nullsafety.0"
+    version: "3.0.0-nullsafety.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -60,12 +60,10 @@ packages:
   country_pickers:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "09921040d5f9b284b76cd9017c79507f40d1e007"
-      url: "https://github.com/haliknihudas666/country_pickers.git"
-    source: git
-    version: "1.3.1"
+      name: country_pickers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   crypto:
     dependency: transitive
     description:
@@ -170,12 +168,10 @@ packages:
   phone_number:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6ddb66d94694635a9b14366cfd3dc8b0904d3f9b"
-      url: "https://github.com/VictorUvarov/phone_number.git"
-    source: git
-    version: "0.8.1+1"
+      name: phone_number
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.0"
   pointycastle:
     dependency: transitive
     description:
