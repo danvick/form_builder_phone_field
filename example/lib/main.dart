@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,10 @@ class MyHomePage extends StatelessWidget {
                 ]),
               ),
               const SizedBox(height: 15),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState.saveAndValidate()) {
-                    print(_formKey.currentState.value);
+                  if (_formKey.currentState!.saveAndValidate()) {
+                    print(_formKey.currentState!.value);
                   }
                 },
                 child: Text("Submit"),

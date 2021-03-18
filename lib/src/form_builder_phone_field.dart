@@ -22,7 +22,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
   final TextAlign textAlign;
   final bool autofocus;
   final bool autocorrect;
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement maxLengthEnforcement;
   final int? maxLength;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onFieldSubmitted;
@@ -71,7 +71,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     this.textCapitalization = TextCapitalization.none,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.enableInteractiveSelection = true,
-    this.maxLengthEnforced = true,
+    this.maxLengthEnforcement = MaxLengthEnforcement.enforced,
     this.textAlign = TextAlign.start,
     this.autofocus = false,
     this.autocorrect = true,
@@ -187,7 +187,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
                       maxLength: maxLength,
                       inputFormatters: inputFormatters,
                       keyboardAppearance: keyboardAppearance,
-                      maxLengthEnforced: maxLengthEnforced,
+                      maxLengthEnforcement: maxLengthEnforcement,
                       scrollPadding: scrollPadding,
                       textAlign: textAlign,
                       textCapitalization: textCapitalization,
@@ -347,8 +347,8 @@ class _FormBuilderPhoneFieldState
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: CountryPickerUtils.getDefaultFlagImage(country),
-        title: Text(country.name!),
-        trailing: Text('+${country.phoneCode!}'),
+        title: Text(country.name),
+        trailing: Text('+${country.phoneCode}'),
       ),
     );
   }
