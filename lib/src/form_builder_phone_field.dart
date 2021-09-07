@@ -1,5 +1,6 @@
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
+import 'package:country_pickers/utils/typedefs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +52,62 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
   final bool isCupertinoPicker;
   final double? cupertinoPickerSheetHeight;
   final TextAlignVertical? textAlignVertical;
+
+  ///The [itemExtent] of [CupertinoPicker]
+  /// The uniform height of all children.
+  ///
+  /// All children will be given the [BoxConstraints] to match this exact
+  /// height. Must not be null and must be positive.
+  final double pickerItemHeight;
+
+  ///The height of the picker
+  final double pickerSheetHeight;
+
+  ///The TextStyle that is applied to Text widgets inside item
+  final TextStyle? textStyle;
+
+  /// Relative ratio between this picker's height and the simulated cylinder's diameter.
+  ///
+  /// Smaller values creates more pronounced curvatures in the scrollable wheel.
+  ///
+  /// For more details, see [ListWheelScrollView.diameterRatio].
+  ///
+  /// Must not be null and defaults to `1.1` to visually mimic iOS.
+  final double diameterRatio;
+
+  /// Background color behind the children.
+  ///
+  /// Defaults to a gray color in the iOS color palette.
+  ///
+  /// This can be set to null to disable the background painting entirely; this
+  /// is mildly more efficient than using [Colors.transparent].
+  final Color backgroundColor;
+
+  /// {@macro flutter.rendering.wheelList.offAxisFraction}
+  final double offAxisFraction;
+
+  /// {@macro flutter.rendering.wheelList.useMagnifier}
+  final bool useMagnifier;
+
+  /// {@macro flutter.rendering.wheelList.magnification}
+  final double magnification;
+
+  final Country? initialCountry;
+
+  /// A [FixedExtentScrollController] to read and control the current item.
+  ///
+  /// If null, an implicit one will be created internally.
+  final FixedExtentScrollController? scrollController;
+
+  /// [Comparator] to be used in sort of country list
+  final Comparator<Country>? sortComparator;
+
+  /// List of countries that are placed on top
+  final List<Country>? priorityList;
+
+  ///Callback that is called with selected item of type Country which returns a
+  ///Widget to build list view item inside dialog
+  final ItemBuilder? itemBuilder;
 
   /// Creates field for international phone number input.
   FormBuilderPhoneField({
@@ -105,6 +162,19 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     this.isCupertinoPicker = false,
     this.cupertinoPickerSheetHeight,
     this.textAlignVertical,
+    this.pickerItemHeight = defaultPickerItemHeight,
+    this.pickerSheetHeight = defaultPickerSheetHeight,
+    this.textStyle,
+    this.diameterRatio = 1.35,
+    this.backgroundColor = const Color(0xFFD2D4DB),
+    this.offAxisFraction = 0.0,
+    this.useMagnifier = false,
+    this.magnification = 1.0,
+    this.initialCountry,
+    this.scrollController,
+    this.sortComparator,
+    this.priorityList,
+    this.itemBuilder,
   })  : assert(initialValue == null ||
             controller == null ||
             defaultSelectedCountryIsoCode != null),
@@ -291,6 +361,17 @@ class _FormBuilderPhoneFieldState
                   },
                 )
               : null,
+          offAxisFraction: widget.offAxisFraction,
+          backgroundColor: widget.backgroundColor,
+          diameterRatio: widget.diameterRatio,
+          initialCountry: widget.initialCountry,
+          magnification: widget.magnification,
+          sortComparator: widget.sortComparator,
+          useMagnifier: widget.useMagnifier,
+          itemBuilder: widget.itemBuilder,
+          pickerItemHeight: widget.pickerItemHeight,
+          scrollController: widget.scrollController,
+          textStyle: widget.textStyle,
         );
       },
     );
@@ -336,6 +417,7 @@ class _FormBuilderPhoneFieldState
                   )
                 : null,
             itemBuilder: _buildDialogItem,
+            sortComparator: widget.sortComparator,
           ),
         );
       },

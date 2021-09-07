@@ -50,6 +50,21 @@ class MyHomePage extends StatelessWidget {
                 ]),
               ),
               const SizedBox(height: 15),
+              FormBuilderPhoneField(
+                name: 'phone_number_cupertino',
+                isCupertinoPicker: true,
+                decoration: const InputDecoration(
+                  labelText: 'Phone Number',
+                  hintText: 'Hint',
+                ),
+                // onChanged: _onChanged,
+                priorityListByIsoCode: ['US'],
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.numeric(context),
+                  FormBuilderValidators.required(context),
+                ]),
+              ),
+              const SizedBox(height: 15),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.saveAndValidate()) {
