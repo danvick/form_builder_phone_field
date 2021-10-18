@@ -39,8 +39,12 @@ class MyHomePage extends StatelessWidget {
               FormBuilderPhoneField(
                 name: 'phone_number',
                 decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  hintText: 'Hint',
+                  // label: Text("Phone Number"),
+                  labelText: "Phone Number",
+                  hintText: "enter phone ",
+                  // prefixIcon: Icon(Icons.phone),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 // onChanged: _onChanged,
                 priorityListByIsoCode: ['KE'],
@@ -54,8 +58,10 @@ class MyHomePage extends StatelessWidget {
                 name: 'phone_number_cupertino',
                 isCupertinoPicker: true,
                 decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                  hintText: 'Hint',
+                  label: Text("Phone Number"),
+                  prefixIcon: Icon(Icons.phone),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
                 // onChanged: _onChanged,
                 priorityListByIsoCode: ['US'],

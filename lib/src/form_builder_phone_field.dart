@@ -117,7 +117,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     FormFieldValidator<String>? validator,
     String? initialValue,
     InputDecoration decoration = const InputDecoration(),
-    ValueChanged<String>? onChanged,
+    ValueChanged<String?>? onChanged,
     ValueTransformer<String>? valueTransformer,
     bool enabled = true,
     FormFieldSetter<String>? onSaved,
@@ -195,7 +195,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
             final state = field as _FormBuilderPhoneFieldState;
 
             return InputDecorator(
-              decoration: state.decoration(),
+              decoration: decoration,
               child: Row(
                 children: <Widget>[
                   GestureDetector(
